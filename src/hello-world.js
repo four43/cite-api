@@ -2,12 +2,22 @@
 /*global define */
 
 define(['handlebars', 'ajax'], function(Handlebars, ajax) {
-	'use strict'
+	'use strict';
 
-	function compile(templatePath) {
-		return ajax.get(templatePath).done(function(content) {
-			return Handlebars.compile(content);
-		});
+	function compile(templatePath, callback) {
+		try {
+			return ajax(templatePath, {
+				complete: function(content) {
+					callback(Handlebars.compile(content));
+				}
+			});
+		}
+		catch (err) {
+			console.log('Ajax:');
+			console.log(ajax);
+			console.log(Handlebars);
+			console.error(err.stack());
+		}
 	}
 
 	return compile;
