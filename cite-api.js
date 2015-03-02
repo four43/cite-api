@@ -23,6 +23,8 @@ define(function(require) {
 	CiteApi.prototype.load = function(schema) {
 
 	};
+
+	CiteApi.prototype.loadSchema = require('src/load-schema');
 	CiteApi.prototype.loadTemplate = require('src/load-template');
 
 	return CiteApi;
