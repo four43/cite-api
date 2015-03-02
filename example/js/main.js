@@ -2,20 +2,16 @@
 requirejs.config({
 	baseUrl: '../../lib',
 	paths: {
-		citeApi: '../../../cite-api',
+		CiteApi: '../../../cite-api',
 		src: '../../../src'
-	},
-	shim: {
-		ajax: {
-			exports: 'ajax'
-		}
 	}
 });
 
-requirejs(['citeApi', 'handlebars'], function(citeApi, Handlebars, ajax) {
-	var display = function(template) {
-		var data = {data: "Wow this actually works"};
-		document.querySelector('#doc-container').innerHTML = template(data);
-	};
-	citeApi.compile('templates/echo.handlebars', display);
+requirejs(['CiteApi', 'handlebars'], function(CiteApi, Handlebars, ajax) {
+
+	var citeApi = new CiteApi({
+		maxDepth: 3,
+		containerElement: document.querySelector('#doc-container')
+	});
+
 });

@@ -4,7 +4,7 @@
 define(['handlebars'], function (Handlebars) {
 	'use strict';
 
-	function compile(templatePath, callback) {
+	function loadTemplate(templatePath, callback) {
 		try {
 			var request = new XMLHttpRequest();
 			request.open('GET', templatePath, true);
@@ -14,7 +14,7 @@ define(['handlebars'], function (Handlebars) {
 					callback(Handlebars.compile(request.responseText));
 				} else {
 					// We reached our target server, but it returned an error
-					onsole.error("Couldn't get template file: " + templatePath);
+					console.error("Couldn't get template file: " + templatePath);
 				}
 			};
 
@@ -25,12 +25,8 @@ define(['handlebars'], function (Handlebars) {
 			request.send();
 		}
 		catch (err) {
-			console.log('Ajax:');
-			console.log(ajax);
-			console.log(Handlebars);
 			console.error(err.stack());
 		}
 	}
-
-	return compile;
+	return loadTemplate;
 });
