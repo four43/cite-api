@@ -9,7 +9,6 @@
 		"cite-api"
 	],
 	"exclude": [
-		"ajax",
 		"handlebars"
 	],
 	"out": "../dist/cite-api.js",

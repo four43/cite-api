@@ -1,15 +1,18 @@
 //Load common code that includes config, then load the app logic for this page.
 requirejs.config({
-	baseUrl: 'js/lib',
+	baseUrl: '../../lib',
 	paths: {
 		citeApi: '../../../cite-api',
 		src: '../../../src'
+	},
+	shim: {
+		ajax: {
+			exports: 'ajax'
+		}
 	}
 });
 
-requirejs(['citeApi', 'handlebars', 'ajax'], function(citeApi, Handlebars, ajax) {
-	console.log('Ajax1:');
-	console.log(ajax);
+requirejs(['citeApi', 'handlebars'], function(citeApi, Handlebars, ajax) {
 	var display = function(template) {
 		var data = {data: "Wow this actually works"};
 		document.querySelector('#doc-container').innerHTML = template(data);
