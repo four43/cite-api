@@ -1,6 +1,8 @@
 var _ = require('lodash'),
-	http = require('http'),
-	Handlebars = require('handlebars');
+	Handlebars = require('handlebars'),
+	async = require('async'),
+	LoadHandlebarsPartials = require('./src/load-handlebars-partials'),
+	Util = require('./src/util');
 
 Handlebars.registerHelper('equals', function(variable, expected, options) {
 	if(variable === expected) {
@@ -14,49 +16,37 @@ Handlebars.registerHelper('ifRequired', function(required, property, options) {
 	}
 });
 
-Handlebars.registerPartial('numberType', '');
+
 
 var CiteApi = function (options) {
 	var defaultOptions = {
 		maxDepth: 2,
 		schema: '',
-		templateDir:      './template',
-		containerElement: null
+		templateDir:      'template',
+		containerElement: null,
+		templatePartials: {
+			'typeNumber': 'types/number.handlebars',
+			'typeString': 'types/string.handlebars'
+		}
 	};
 
 	this.options = _.merge(defaultOptions, options);
+
+	for(var i in this.options.templatePartials) {
+		this.options.templatePartials[i] = this.options.templateDir + '/' + this.options.templatePartials[i];
+	}
+	LoadHandlebarsPartials(this.options.templatePartials, function(result) {
+		console.log(result);
+	})
 };
 
 CiteApi.prototype.render = function (schemaPath) {
-	this.loadSchema(schemaPath, function(schema) {
-		this.loadTemplate(this.options.templateDir + '/main.handlebars', function(template) {
+	Util.loadSchema(schemaPath, function(schema) {
+		Util.loadTemplate(this.options.templateDir + '/main.handlebars', function(template) {
 			this.options.containerElement.innerHTML = template(schema);
 		}.bind(this));
 	}.bind(this));
 };
 
-CiteApi.prototype.loadSchema = function(schemaPath, callback) {
-	this._loadRemoteData(schemaPath, function(data) {
-		callback(JSON.parse(data));
-	});
-};
-
-CiteApi.prototype.loadTemplate = function (template, callback) {
-	this._loadRemoteData(template, function(data) {
-		callback(Handlebars.compile(data));
-	});
-};
-
-CiteApi.prototype._loadRemoteData = function(path, callback) {
-	http.get({path: path}, function (res) {
-		var buffer = '';
-		res.on('data', function (data) {
-			buffer += data;
-		});
-		res.on('end', function () {
-			callback(buffer);
-		});
-	});
-};
 
 module.exports = CiteApi;

@@ -19,9 +19,11 @@
 			<td>{{@key}}</td>
 			<td>
 				{{#equals type "integer"}}
-					{{> numberType}}
+					{{> typeNumber}}
 				{{/equals}}
-
+				{{#equals type "string"}}
+					{{> typeString}}
+				{{/equals}}
 			</td>
 			<td>{{description}}</td>
 		</tr>
