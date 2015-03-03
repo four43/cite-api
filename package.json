@@ -1,0 +1,43 @@
+{
+  "name": "Cite-API",
+  "version": "0.0.1",
+  "description": "A JSON-Schema API Documenter",
+  "main": "main.js",
+  "directories": {
+    "example": "example"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/four43/cite-api.git"
+  },
+  "keywords": [
+    "documentation",
+    "docs",
+    "schema",
+    "json-schema",
+    "templates"
+  ],
+  "author": "Seth Miller <seth@four43.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/four43/cite-api/issues"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "browserify": "~9.0.3",
+    "browserify-shim": "~3.8.3",
+    "uglifyify": "~3.0.1"
+  },
+  "browserify": {
+    "transform": [
+      "browserify-shim"
+    ]
+  },
+  "browserify-shim": {
+    "handlebars": "global:Handlebars",
+    "lodash": "global:_"
+  }
+}

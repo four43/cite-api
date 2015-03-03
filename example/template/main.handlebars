@@ -1,0 +1,30 @@
+<h1>{{title}}
+	<small>{{description}}</small>
+</h1>
+{{#equals type 'array'}}
+	<strong>[]</strong> - Response is an array of the following:
+{{/equals}}
+
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Type</th>
+			<th>Description</th>
+		</tr>
+	</thead>
+	<tbody>
+	{{#each properties}}
+		<tr {{#ifRequired ../required @key}}class="required"{{/ifRequired}}>
+			<td>{{@key}}</td>
+			<td>
+				{{#equals type "integer"}}
+					{{> numberType}}
+				{{/equals}}
+
+			</td>
+			<td>{{description}}</td>
+		</tr>
+	{{/each}}
+	</tbody>
+</table>

@@ -1,6 +1,7 @@
 {
-	"title": "Example Schema",
-	"type": "object",
+	"title":      "Example Schema",
+	"description" : "A simple, basic example schema",
+	"type":       "object",
 	"properties": {
 		"firstName": {
 			"type": "string"
@@ -14,7 +15,7 @@
 			"minimum":     0
 		}
 	},
-	"required": [
+	"required":   [
 		"firstName",
 		"lastName"
 	]

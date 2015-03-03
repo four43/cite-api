@@ -1,2 +1,2 @@
 #!/bin/sh
-node tools/r.js -o tools/build.json
+browserify main.js -g uglifyify --s CiteApi -o dist/cite-api.js
