@@ -16,7 +16,12 @@ Handlebars.registerHelper('ifRequired', function(required, property, options) {
 	}
 });
 
-
+Handlebars.registerHelper('defaultVal', function(property, defaultVal, options) {
+	if(property == null && property !== 0) {
+		return defaultVal;
+	}
+	return property;
+});
 
 var CiteApi = function (options) {
 	var defaultOptions = {

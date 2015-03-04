@@ -1,0 +1,20 @@
+@stringColor: #337ab7;
+@numberColor: #5cb85c;
+
+.name {
+  font-weight: bold;
+}
+
+.type {
+  font-weight: bold;
+  .type-string {
+    color: @stringColor;
+  }
+
+  .type-number {
+    color: @numberColor;
+    .range {
+      color: lighten(@numberColor, 25%);
+    }
+  }
+}

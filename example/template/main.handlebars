@@ -16,8 +16,8 @@
 	<tbody>
 	{{#each properties}}
 		<tr {{#ifRequired ../required @key}}class="required"{{/ifRequired}}>
-			<td>{{@key}}</td>
-			<td>
+			<td class="name">{{@key}}</td>
+			<td class="type">
 				{{#equals type "integer"}}
 					{{> typeNumber}}
 				{{/equals}}
@@ -25,7 +25,7 @@
 					{{> typeString}}
 				{{/equals}}
 			</td>
-			<td>{{description}}</td>
+			<td class="description">{{description}}</td>
 		</tr>
 	{{/each}}
 	</tbody>
